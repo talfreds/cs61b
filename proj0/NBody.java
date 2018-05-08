@@ -51,8 +51,9 @@ public class NBody {
         String background = "images/starfield.jpg";
         StdDraw.picture(0, 0, background);
 
+        // audio not working.
         String audio = "audio/2001.mid";
-        StdAudio.loop(audio);
+        StdAudio.play(audio);
 
         // Drawing All of the Planets
         for (Planet p: planets) {
