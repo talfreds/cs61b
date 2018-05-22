@@ -1,13 +1,13 @@
-public class LinkedListDeque<GenericType> {
+public class LinkedListDeque<T> {
     private DequeNode sentinel;
     private int size;
 
     public class DequeNode {
         public DequeNode prev;
-        public GenericType item;
+        public T item;
         public DequeNode next;
 
-        public DequeNode(DequeNode p, GenericType i, DequeNode n) {
+        public DequeNode(DequeNode p, T i, DequeNode n) {
             prev = p;
             item = i;
             next = n;
@@ -23,14 +23,14 @@ public class LinkedListDeque<GenericType> {
     }
 
     // Adds an item of type T to the front of the deque.
-    public void addFirst(GenericType item) {
+    public void addFirst(T item) {
         sentinel.next = new DequeNode(sentinel.next.prev, item, sentinel.next);
         sentinel.next.next.prev = sentinel.next;
         size++;
     }
 
     // Adds an item of type T to the back of the deque.
-    public void addLast(GenericType item) {
+    public void addLast(T item) {
         sentinel.prev = new DequeNode(sentinel.prev, item, sentinel.prev.next);
         sentinel.prev.prev.next = sentinel.prev;
         size++;
@@ -61,8 +61,8 @@ public class LinkedListDeque<GenericType> {
     }
 
     // Removes and returns the item at the front of the deque. If no such item exists, returns null.
-    public GenericType removeFirst() {
-        GenericType i = sentinel.next.item;
+    public T removeFirst() {
+        T i = sentinel.next.item;
         sentinel.next = sentinel.next.next;
         sentinel.next.prev = sentinel;
         size--;
@@ -70,8 +70,8 @@ public class LinkedListDeque<GenericType> {
     }
 
     // Removes and returns the item at the back of the deque. If no such item exists, returns null.
-    public GenericType removeLast() {
-        GenericType i = sentinel.prev.item;
+    public T removeLast() {
+        T i = sentinel.prev.item;
         sentinel.prev = sentinel.prev.prev;
         sentinel.prev.next = sentinel;
         size--;
@@ -79,7 +79,7 @@ public class LinkedListDeque<GenericType> {
     }
 
     // Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth. If no such item exists, returns null. Must not alter the deque!
-    public GenericType get(int index) {
+    public T get(int index) {
         DequeNode ptr = sentinel.next;
         int i = 0;
         while (i < index) {
@@ -89,7 +89,7 @@ public class LinkedListDeque<GenericType> {
         return ptr.item;
     }
 
-    public GenericType getRecursiveHelper(DequeNode ptr, int i) {
+    public T getRecursiveHelper(DequeNode ptr, int i) {
         if (i == 0) {
             return ptr.item;
         } else {
@@ -98,7 +98,7 @@ public class LinkedListDeque<GenericType> {
     }
 
     // Same as get, but uses recursion.
-    public GenericType getRecursive(int index) {
+    public T getRecursive(int index) {
         if (index > size) {
             return null;
         } else {
